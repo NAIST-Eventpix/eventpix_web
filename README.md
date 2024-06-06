@@ -1,3 +1,3 @@
 # eventpix
 
-No calendar no life
+No Calendar No Life
