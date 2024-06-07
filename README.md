@@ -29,5 +29,9 @@ next dev
 ```
 
 ## 確認
-(http://localhost:3000)にアクセス
+http://localhost:3000 にアクセス
+
 ![サンプル](./sample.png)
+
+# TODO
+Dockerで一括管理できるようにする
