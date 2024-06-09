@@ -24,6 +24,7 @@ managed = true
 dev-dependencies = [
     "mypy>=1.10.0",
     "ruff>=0.4.8",
+    "types-flask-cors>=4.0.0.20240523",
 ]
 
 [tool.hatch.metadata]
