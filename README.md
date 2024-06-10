@@ -25,7 +25,7 @@ rye run eventpix
 ```
 ```
 cd fontend
-next dev
+npm run dev
 ```
 
 ## 確認
