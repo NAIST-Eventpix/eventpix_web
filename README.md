@@ -2,36 +2,21 @@
 
 No Calendar No Life
 
-# 使い方 (現状)
+# 使い方
 
-## パッケージ管理ツールのインストール
-* [Rye](./backend/CONTRIBUTING.md)
-* Node.js
+## 前提
 
-## 実行前準備
-
-```
-cd backend
-rye sync --no-lock
-cd ../frontend
-npm install
-```
+* Docker
 
 ## 実行
-それぞれ別のターミナルで実行
+
+`docker-compose.yml`があるディレクトリで次のコマンドを実行．
+
 ```
-cd backend
-rye run eventpix
-```
-```
-cd fontend
-npm run dev
+docker compose up -d
 ```
 
 ## 確認
 http://localhost:3000 にアクセス
 
 ![サンプル](./sample.png)
-
-# TODO
-Dockerで一括管理できるようにする
