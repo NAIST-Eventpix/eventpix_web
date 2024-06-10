@@ -4,11 +4,14 @@ on: pull_request
 jobs:
   lint:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     steps:
       - uses: actions/checkout@v4
       - name: Install Rye
         run: |
-          curl -sSf https://rye-up.com/get | bash
+          curl -sSf https://rye.astral.sh/get | bash
           echo "$HOME/.rye/shims" >> $GITHUB_PATH
         env:
           RYE_INSTALL_OPTION: "--yes"
