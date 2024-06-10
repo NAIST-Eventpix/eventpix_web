@@ -3,25 +3,14 @@
 ## 開発環境の構築
 
 1. [Rye](https://rye-up.com/guide/installation/)をインストール
-2. Eventpixプロジェクトをクローン
 
-```bash
-git clone git@github.com:take0x/eventpix.git && cd eventpix
-```
-
-3. 作業用ブランチを作成
-
-```bash
-git switch -c xxx_develop
-```
-
-4. 作業用の仮装環境を作成
+2. 作業用の仮装環境を作成
 
 ```bash
 rye sync --no-lock
 ```
 
-5. 正常に動作するか確認
+3. 正常に動作するか確認
 
 ```bash
 rye run eventpix
