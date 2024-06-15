@@ -8,6 +8,5 @@ def test_index(client: FlaskClient) -> None:
 
 def test_upload(client: FlaskClient) -> None:
     data = {"image": (open("../sample.png", "rb"), "sample.png")}
-    print(data)
     response = client.post("/upload", data=data)
     assert response.data == b"Upload successful!"
