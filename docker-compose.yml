@@ -5,16 +5,18 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-      #    networks:
-      #- web
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend/src/app/
+          target: /app/src/app/
+        - action: rebuild
+          path: ./frontend/package.json
+        - action: rebuild
+          path: ./frontend/package-lock.json
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
       - "5001:5000"
-      #networks:
-      #- web
-      #networks:
-      #web:
-      #driver: bridge
