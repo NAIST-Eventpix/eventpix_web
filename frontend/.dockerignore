@@ -1,0 +1,10 @@
+# Directories
+.next
+node_modules
+
+# Files
+.dockerignore
+.gitignore
+Dockerfile
+README.md
+next-env.d.ts
