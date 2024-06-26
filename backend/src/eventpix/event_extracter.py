@@ -30,7 +30,7 @@ def read(event_content: str) -> icalendar.Calendar:
 
 
 if __name__ == "__main__":
-    sample_text = f""" 	実施場所	時間	科目名	タイトル	詳細
+    sample_text = """ 	実施場所	時間	科目名	タイトル	詳細
 5月30日(木)
 
 奈良先端大
