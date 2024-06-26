@@ -36,6 +36,8 @@ packaging==24.1
 pluggy==1.5.0
     # via pytest
 pytest==8.2.2
+python-dotenv==1.0.1
+    # via eventpix
 ruff==0.4.8
 types-flask-cors==4.0.0.20240523
 typing-extensions==4.12.1
