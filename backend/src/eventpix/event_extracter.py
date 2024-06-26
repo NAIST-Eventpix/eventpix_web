@@ -2,30 +2,30 @@ import icalendar  # type: ignore[import-untyped]
 
 # from datetime import datetime
 # from icalendar import Calendar, Event, vCalAddress, vText
-from openai import OpenAI
-import os
-import pprint
+# from openai import OpenAI
+# import os
+# import pprint
 # using chatgpt api, get icalernder object
 # https://github.com/openai/openai-python
 
-client = OpenAI(
-    # This is the default and can be omitted
-    api_key=os.environ.get("OPENAI_API_KEY"),
-)
+# client = OpenAI(
+#     # This is the default and can be omitted
+#     api_key=os.environ.get("OPENAI_API_KEY"),
+# )
 
 
 def read(event_content: str) -> icalendar.Calendar:
     cal = icalendar.Calendar()
-    chat_completion = client.chat.completions.create(
-        messages=[
-            {
-                "role": "user",
-                "content": "以下の予定内容をics形式で返してください\n" + event_content,
-            }
-        ],
-        model="gpt-3.5-turbo",
-    )
-    pprint.pprint(chat_completion)
+    # chat_completion = client.chat.completions.create(
+    #     messages=[
+    #         {
+    #             "role": "user",
+    #             "content": "以下の予定内容をics形式で返してください\n" + event_content,
+    #         }
+    #     ],
+    #     model="gpt-3.5-turbo",
+    # )
+    # pprint.pprint(chat_completion)
     return cal
 
 
