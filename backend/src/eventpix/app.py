@@ -1,3 +1,5 @@
+import hashlib
+
 from dotenv import load_dotenv
 from flask import Flask, request
 from flask_cors import CORS
@@ -15,8 +17,11 @@ def index() -> str:
 @app.route("/upload", methods=["POST"])
 def upload() -> str:
     file = request.files["image"]
-    file.save(f"uploads/{file.filename}")
-    return "Upload successful!"
+    path = f"uploads/{file.filename}"
+    file.save(path)
+    with open(path, "rb") as f:
+        hash = hashlib.md5(f.read()).hexdigest()
+    return hash
 
 
 def main() -> None:
