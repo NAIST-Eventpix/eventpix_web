@@ -2,12 +2,13 @@
 name = "eventpix"
 version = "0.1.0"
 description = "No calendar no life"
-authors = [
-    { name = "take0x" }
-]
+authors = [{ name = "take0x" }]
 dependencies = [
     "flask>=3.0.3",
     "flask-cors>=4.0.1",
+    "openai>=1.35.4",
+    "datetime>=5.5",
+    "icalendar>=5.0.13",
     "python-dotenv>=1.0.1",
 ]
 readme = "README.md"
