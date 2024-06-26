@@ -12,17 +12,40 @@ client = OpenAI(
 )
 
 
-def read(src_text):
+def read(event_content: str) -> icalendar.Calendar:
+    events = []
     chat_completion = client.chat.completions.create(
         messages=[
             {
                 "role": "user",
-                "content": "Say this is a test",
+                "content": "以下の予定内容をics形式で返してください\n" + event_content,
             }
         ],
         model="gpt-3.5-turbo",
     )
+    print(chat_completion)
+    return events
 
 
 if __name__ == '__main__':
-    read('output.ics')
+    sample_text = f""" 	実施場所	時間	科目名	タイトル	詳細
+5月30日(木)
+
+奈良先端大
+
+18:00～21:00
+
+プロトタイピングA	組み込みシステム1	Raspberry Pi とLED/センサーを組み合わせた
+システムとWebサービスの連携
+6月1日
+(土)
+
+MOBIO
+
+10:30～17:50
+
+イノベーション創出特論1	GEIOT基礎１	パネル：先端科学技術事業化の潮流と重要性、概要
+先端科学技術ベンチャーの現在、ビジネスモデルキャンバス、
+チームわけ、アイスブレーク"""
+
+    read(sample_text)
