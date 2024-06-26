@@ -69,6 +69,8 @@ pydantic==2.7.4
 pydantic-core==2.18.4
     # via pydantic
 pytest==8.2.2
+python-dotenv==1.0.1
+    # via eventpix
 python-dateutil==2.9.0.post0
     # via icalendar
 pytz==2024.1
