@@ -1,4 +1,4 @@
-import icalendar
+import icalendar  # type: ignore[import-untyped]
 
 # from datetime import datetime
 # from icalendar import Calendar, Event, vCalAddress, vText
@@ -15,7 +15,7 @@ client = OpenAI(
 
 
 def read(event_content: str) -> icalendar.Calendar:
-    events = []
+    cal = icalendar.Calendar()
     chat_completion = client.chat.completions.create(
         messages=[
             {
@@ -26,7 +26,7 @@ def read(event_content: str) -> icalendar.Calendar:
         model="gpt-3.5-turbo",
     )
     pprint.pprint(chat_completion)
-    return events
+    return cal
 
 
 if __name__ == "__main__":
