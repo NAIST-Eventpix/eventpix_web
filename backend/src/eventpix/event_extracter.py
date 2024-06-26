@@ -1,8 +1,10 @@
 import icalendar
-from datetime import datetime
-from icalendar import Calendar, Event, vCalAddress, vText
+
+# from datetime import datetime
+# from icalendar import Calendar, Event, vCalAddress, vText
 from openai import OpenAI
 import os
+import pprint
 # using chatgpt api, get icalernder object
 # https://github.com/openai/openai-python
 
@@ -23,11 +25,11 @@ def read(event_content: str) -> icalendar.Calendar:
         ],
         model="gpt-3.5-turbo",
     )
-    print(chat_completion)
+    pprint.pprint(chat_completion)
     return events
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sample_text = f""" 	実施場所	時間	科目名	タイトル	詳細
 5月30日(木)
 

@@ -13,6 +13,9 @@ blinker==1.8.2
     # via flask
 click==8.1.7
     # via flask
+colorama==0.4.6
+    # via click
+    # via pytest
 flask==3.0.3
     # via eventpix
     # via flask-cors
