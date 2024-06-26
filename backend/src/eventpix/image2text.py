@@ -5,8 +5,10 @@
 import io
 from pillow_heif import register_heif_opener  # type: ignore[import-untyped]
 from PIL import Image
+from dotenv import load_dotenv
 
 register_heif_opener()
+load_dotenv()
 
 
 def _get_image_binary(imagepath: str) -> bytes:
