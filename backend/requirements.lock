@@ -51,6 +51,8 @@ jinja2==3.1.4
 markupsafe==2.1.5
     # via jinja2
     # via werkzeug
+python-dotenv==1.0.1
+    # via eventpix
 openai==1.35.4
     # via eventpix
 pydantic==2.7.4
