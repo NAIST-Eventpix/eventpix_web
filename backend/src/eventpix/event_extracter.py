@@ -1,11 +1,11 @@
-import icalendar  # type: ignore[import-untyped]
+import re
 
-from icalendar import Calendar
+import icalendar  # type: ignore[import-untyped]
 
 # from openai import OpenAI
 # import os
 from dotenv import load_dotenv
-import re
+from icalendar import Calendar
 
 load_dotenv()  # take environment variables from .env.
 
@@ -58,5 +58,3 @@ def _get_calender(ics_content: str) -> icalendar.Calendar:
         print(f"{event["DTEND"].dt}")
         print(f"{event["DESCRIPTION"]}")
     return cal
-
-

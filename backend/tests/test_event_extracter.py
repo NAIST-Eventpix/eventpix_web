@@ -1,6 +1,7 @@
+import datetime
+
 import pytz  # type: ignore[import-untyped]
 from eventpix import event_extracter
-import datetime
 
 # import pandas as pd
 # import os
