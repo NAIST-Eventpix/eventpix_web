@@ -17,6 +17,6 @@ docker compose up -w
 ```
 
 ## 確認
-http://localhost:3000 にアクセス
+http://localhost:5001 にアクセス
 
 ![サンプル](./sample.png)

@@ -1,15 +1,16 @@
 import hashlib
 
 from dotenv import load_dotenv
-from flask import Flask, request
+from flask import Flask, render_template, request
 
 load_dotenv(override=True)
 app = Flask(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
 @app.route("/")
 def index() -> str:
-    return "Hello from Flask!"
+    return render_template('index.html')
 
 
 @app.route("/upload", methods=["POST"])
@@ -23,7 +24,7 @@ def upload() -> str:
 
 
 def main() -> None:
-    app.run(host="0.0.0.0", port=5001)
+    app.run(debug=True, host="0.0.0.0", port=5001)
 
 
 if __name__ == "__main__":
