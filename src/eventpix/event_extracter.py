@@ -54,7 +54,7 @@ def _get_calender(ics_content: str) -> icalendar.Calendar:
     for event in cal.walk("VEVENT"):
         print(event["SUMMARY"])
         print(f"{event.name}")
-        print(f"{event["DTSTART"].dt}")
-        print(f"{event["DTEND"].dt}")
-        print(f"{event["DESCRIPTION"]}")
+        print(f"{event['DTSTART'].dt}")
+        print(f"{event['DTEND'].dt}")
+        print(f"{event['DESCRIPTION']}")
     return cal
