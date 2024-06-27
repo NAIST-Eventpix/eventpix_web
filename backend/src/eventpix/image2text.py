@@ -3,9 +3,10 @@
 
 # this library need to read heif file
 import io
-from pillow_heif import register_heif_opener  # type: ignore[import-untyped]
-from PIL import Image
+
 from dotenv import load_dotenv
+from PIL import Image
+from pillow_heif import register_heif_opener  # type: ignore[import-untyped]
 
 register_heif_opener()
 load_dotenv()
@@ -37,8 +38,8 @@ def detect_text(imagepath: str) -> tuple[str, str]:
 
     if response.error.message:
         raise Exception(
-            "{}\nFor more info on error messages, check: "
-            "https://cloud.google.com/apis/design/errors".format(response.error.message)
+            f"{response.error.message}\nFor more info on error messages, check: "
+            "https://cloud.google.com/apis/design/errors"
         )
 
     text = str(response.full_text_annotation.text)

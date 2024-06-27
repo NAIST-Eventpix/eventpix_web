@@ -42,3 +42,9 @@ packages = ["src/eventpix"]
 
 [tool.mypy]
 strict = true
+
+[tool.ruff.lint]
+extend-select = [
+    "I",  # isort
+    "UP", # pyupgrade
+]
