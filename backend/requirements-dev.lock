@@ -16,9 +16,14 @@ anyio==4.4.0
     # via openai
 blinker==1.8.2
     # via flask
+cachetools==5.3.3
+    # via google-auth
 certifi==2024.6.2
     # via httpcore
     # via httpx
+    # via requests
+charset-normalizer==3.3.2
+    # via requests
 click==8.1.7
     # via flask
 colorama==0.4.6
@@ -35,6 +40,21 @@ flask==3.0.3
     # via types-flask-cors
 flask-cors==4.0.1
     # via eventpix
+google-api-core==2.19.1
+    # via google-cloud-vision
+google-auth==2.30.0
+    # via google-api-core
+    # via google-cloud-vision
+google-cloud-vision==3.7.2
+    # via eventpix
+googleapis-common-protos==1.63.2
+    # via google-api-core
+    # via grpcio-status
+grpcio==1.64.1
+    # via google-api-core
+    # via grpcio-status
+grpcio-status==1.62.2
+    # via google-api-core
 h11==0.14.0
     # via httpcore
 httpcore==1.0.5
@@ -46,6 +66,7 @@ icalendar==5.0.13
 idna==3.7
     # via anyio
     # via httpx
+    # via requests
 iniconfig==2.0.0
     # via pytest
 itsdangerous==2.2.0
@@ -62,20 +83,44 @@ openai==1.35.4
     # via eventpix
 packaging==24.1
     # via pytest
+pillow==10.3.0
+    # via eventpix
+    # via pillow-heif
+pillow-heif==0.16.0
+    # via eventpix
 pluggy==1.5.0
     # via pytest
+proto-plus==1.24.0
+    # via google-api-core
+    # via google-cloud-vision
+protobuf==4.25.3
+    # via google-api-core
+    # via google-cloud-vision
+    # via googleapis-common-protos
+    # via grpcio-status
+    # via proto-plus
+pyasn1==0.6.0
+    # via pyasn1-modules
+    # via rsa
+pyasn1-modules==0.4.0
+    # via google-auth
 pydantic==2.7.4
     # via openai
 pydantic-core==2.18.4
     # via pydantic
 pytest==8.2.2
-python-dotenv==1.0.1
-    # via eventpix
 python-dateutil==2.9.0.post0
     # via icalendar
+python-dotenv==1.0.1
+    # via eventpix
 pytz==2024.1
     # via datetime
+    # via eventpix
     # via icalendar
+requests==2.32.3
+    # via google-api-core
+rsa==4.9
+    # via google-auth
 ruff==0.4.8
 setuptools==70.1.1
     # via zope-interface
@@ -93,6 +138,8 @@ typing-extensions==4.12.1
     # via openai
     # via pydantic
     # via pydantic-core
+urllib3==2.2.2
+    # via requests
 werkzeug==3.0.3
     # via flask
 zope-interface==6.4.post2
