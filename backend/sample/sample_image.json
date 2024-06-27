@@ -1099,11 +1099,11 @@ text_annotations {
       y: 250
     }
     vertices {
-      x: 1372
+      x: 1373
       y: 250
     }
     vertices {
-      x: 1372
+      x: 1373
       y: 269
     }
     vertices {
@@ -7678,11 +7678,11 @@ full_text_annotation {
               y: 250
             }
             vertices {
-              x: 1372
+              x: 1373
               y: 250
             }
             vertices {
-              x: 1372
+              x: 1373
               y: 269
             }
             vertices {
@@ -7697,11 +7697,11 @@ full_text_annotation {
                 y: 250
               }
               vertices {
-                x: 1372
+                x: 1373
                 y: 250
               }
               vertices {
-                x: 1372
+                x: 1373
                 y: 269
               }
               vertices {

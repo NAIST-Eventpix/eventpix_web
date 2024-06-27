@@ -48,8 +48,8 @@ def detect_text(imagepath: str) -> tuple[str, str]:
 
 
 if __name__ == "__main__":
-    text, json = detect_text("sample_image.jpg")
-    with open("sample_image.txt", "w", encoding="utf8") as f:
+    text, json = detect_text("../../sample/sample_image.jpg")
+    with open("../../sample/sample_image.txt", "w", encoding="utf8") as f:
         f.write(text)
-    with open("sample_image.json", "w", encoding="utf8") as f:
+    with open("../../sample/sample_image.json", "w", encoding="utf8") as f:
         f.write(json)
