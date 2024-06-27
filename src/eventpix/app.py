@@ -1,5 +1,4 @@
 import hashlib
-import os
 
 from dotenv import load_dotenv
 from flask import Flask, render_template, request
