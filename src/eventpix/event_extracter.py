@@ -52,15 +52,3 @@ def _get_ics_content_only(content: str) -> str:
     pattern = re.compile(r"BEGIN:VCALENDAR.*?END:VCALENDAR", re.DOTALL)
     matches = pattern.findall(content)
     return str(matches[0])
-
-
-if __name__ == "__main__":
-    sample_dir = Path(__file__).parent / "sample"
-    sample_text = (sample_dir / "sample_image.txt").read_text(encoding="utf8")
-    cal = read(sample_text)
-    for event in cal.walk("VEVENT"):
-        print(event["SUMMARY"])
-        print(f"{event.name}")
-        print(f"{event['DTSTART'].dt}")
-        print(f"{event['DTEND'].dt}")
-        print(f"{event['DESCRIPTION']}")

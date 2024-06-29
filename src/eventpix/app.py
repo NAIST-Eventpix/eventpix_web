@@ -15,6 +15,10 @@ app = Flask(__name__)
 def save(file: FileStorage) -> Path:
     content = file.read()
     hash = hashlib.md5(content).hexdigest()
+
+    if file.filename is None:
+        raise ValueError("file.filename is None")
+
     suffix = Path(file.filename).suffix
     upload_dir = Path(__file__).parent / "upload"
     upload_dir.mkdir(exist_ok=True)
