@@ -32,8 +32,8 @@ def index() -> str:
     return render_template("index.html")
 
 
-@app.route("/test_result_view", methods=["GET"])
-def test_result_view() -> str:
+@app.route("/sample_result_view", methods=["GET"])
+def sample_result_view() -> str:
     sample_dir = Path(__file__).parent / "sample"
     ics_path = sample_dir / "sample.ics"
     ics_text = ics_path.read_text(encoding="utf8")
