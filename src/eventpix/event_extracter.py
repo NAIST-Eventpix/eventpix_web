@@ -1,4 +1,3 @@
-import os
 import re
 from pathlib import Path
 
@@ -7,14 +6,9 @@ from dotenv import load_dotenv
 from icalendar import Calendar
 from openai import OpenAI
 
+openai_enabled = False
+
 load_dotenv(override=True)  # take environment variables from .env.
-
-# https://github.com/openai/openai-python
-
-client = OpenAI(
-    # This is the default and can be omitted
-    api_key=os.environ.get("OPENAI_API_KEY"),
-)
 
 
 def read(event_content_path: Path) -> icalendar.Calendar:
@@ -29,7 +23,10 @@ def get_calender(ics_content: str) -> icalendar.Calendar:
     return Calendar.from_ical(ics_content)
 
 
+# https://github.com/openai/openai-python
 def _ask_chatgpt(content: str) -> str:
+    if not openai_enabled:
+        client = OpenAI()
     completion = client.chat.completions.create(
         messages=[
             {
