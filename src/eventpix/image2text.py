@@ -3,6 +3,7 @@
 
 # this library need to read heif file
 import io
+from pathlib import Path
 
 from dotenv import load_dotenv
 from PIL import Image
@@ -12,45 +13,54 @@ register_heif_opener()
 load_dotenv()
 
 
-def _get_image_binary(imagepath: str) -> bytes:
-    img_bytes = io.BytesIO()
-    img = Image.open(imagepath)
-    img = img.convert("RGB")
-    img.save(img_bytes, format="JPEG")
-    return img_bytes.getvalue()
+class Image2Text:
+    def __init__(self, imagepath: Path) -> None:
+        self._imagepath = imagepath
+        self._hash = imagepath.stem
 
+        output_dir = Path(__file__).parent / "output"
+        output_dir.mkdir(exist_ok=True)
+        self._output_text_path = output_dir / f"{self._hash}.txt"
+        self._output_json_path = output_dir / f"{self._hash}.json"
 
-def detect_text(imagepath: str) -> tuple[str, str]:
-    """Detects text in the file."""
-    from google.cloud import vision
+    @property
+    def output_text_path(self) -> Path:
+        return self._output_text_path
 
-    client = vision.ImageAnnotatorClient()
+    @property
+    def output_json_path(self) -> Path:
+        return self._output_json_path
 
-    # with open(imagepath, "rb") as image_file:
-    #     content = image_file.read()
+    def _get_image_binary(self) -> bytes:
+        img_bytes = io.BytesIO()
+        img = Image.open(self._imagepath)
+        img = img.convert("RGB")
+        img.save(img_bytes, format="JPEG")
+        return img_bytes.getvalue()
 
-    content = _get_image_binary(imagepath)
-    image = vision.Image(content=content)
+    def _save(self, res_text: str, res_json: str) -> None:
+        self._output_text_path.write_text(res_text, encoding="utf8")
+        self._output_json_path.write_text(res_json, encoding="utf8")
 
-    response = client.document_text_detection(
-        image=image, image_context={"language_hints": ["ja"]}
-    )
+    def detect_text(self) -> None:
+        """Detects text in the file."""
+        from google.cloud import vision
 
-    if response.error.message:
-        raise Exception(
-            f"{response.error.message}\nFor more info on error messages, check: "
-            "https://cloud.google.com/apis/design/errors"
+        client = vision.ImageAnnotatorClient()
+        content = self._get_image_binary()
+        image = vision.Image(content=content)
+
+        response = client.document_text_detection(
+            image=image, image_context={"language_hints": ["ja"]}
         )
 
-    text = str(response.full_text_annotation.text)
-    json = str(response)
+        if response.error.message:
+            raise Exception(
+                f"{response.error.message}\nFor more info on error messages, check: "
+                "https://cloud.google.com/apis/design/errors"
+            )
 
-    return text, json
+        res_text = str(response.full_text_annotation.text)
+        res_json = str(response)
 
-
-if __name__ == "__main__":
-    text, json = detect_text("../../sample/sample_image.jpg")
-    with open("../../sample/sample_image.txt", "w", encoding="utf8") as f:
-        f.write(text)
-    with open("../../sample/sample_image.json", "w", encoding="utf8") as f:
-        f.write(json)
+        self._save(res_text, res_json)

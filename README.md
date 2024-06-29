@@ -6,17 +6,18 @@ No Calendar No Life
 
 ## 前提
 
-* Docker
+- Docker
 
 ## 実行
 
-`docker-compose.yml`があるディレクトリで次のコマンドを実行．
+`compose.yml`があるディレクトリで次のコマンドを実行．
 
 ```
-docker compose up -w
+docker compose up --build
 ```
 
 ## 確認
+
 http://localhost:5001 にアクセス
 
 ![サンプル](./sample.png)
