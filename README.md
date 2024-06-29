@@ -13,7 +13,7 @@ No Calendar No Life
 `compose.yml`があるディレクトリで次のコマンドを実行．
 
 ```
-docker compose up
+docker compose up --build
 ```
 
 ## 確認
