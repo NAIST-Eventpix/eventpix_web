@@ -100,7 +100,7 @@ LOCATION:MOBIO
 END:VEVENT
 END:VCALENDAR"""
         print()
-        cal = event_extracter._get_calender(ics_content)
+        cal = event_extracter.get_calender(ics_content)
         events = [event for event in cal.walk("VEVENT")]
         asia = pytz.timezone("Asia/Tokyo")
 

@@ -12,3 +12,6 @@ wheels/
 # venv
 .venv
 
+*.json
+output/
+upload/
