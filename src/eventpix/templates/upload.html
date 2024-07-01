@@ -16,25 +16,25 @@
 	</header>
 	<main>
 		<section>
-			<h1>画像の予定抽出</h1>
+			<h1>抽出結果</h1>
 			<table>
-                <tr>
-                    <th>概要</th>
+				<tr>
+					<th>概要</th>
 					<th>開始</th>
 					<th>終了</th>
 					<th>詳細</th>
 					<th>場所</th>
-                </tr>
-                {% for event in events %}
-                <tr>
-                    <td>{{event.SUMMARY}}</td>
-					<td>{{event.DTSTART.dt}}</td>
-					<td>{{event.DTEND.dt}}</td>
-					<td>{{event.DESCRIPTION}}</td>
-					<td>{{event.LOCATION}}</td>
-                </tr>
-                {% endfor %}
-            </table>
+				</tr>
+				{% for event in events %}
+					<tr>
+						<td>{{event.SUMMARY}}</td>
+						<td>{{event.DTSTART.dt}}</td>
+						<td>{{event.DTEND.dt}}</td>
+						<td>{{event.DESCRIPTION}}</td>
+						<td>{{event.LOCATION}}</td>
+					</tr>
+				{% endfor %}
+			</table>
 		</section>
 	</main>
 	<script src="/static/js/main.js"></script>
