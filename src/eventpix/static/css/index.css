@@ -3,6 +3,10 @@
 	--main-color: #FF6700;
 }
 
+/*!
+ * "HackGen" is lisenced under the SIL Open Font License 1.1
+ * by https://github.com/yuru7/HackGen/
+ */
 @font-face {
 	font-family: 'HackGen';
 	src: url('../font/HackGen35ConsoleNF-Regular.ttf') format(opentype);
