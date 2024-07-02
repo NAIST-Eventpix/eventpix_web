@@ -1,0 +1,128 @@
+:root {
+	--header-height: 5rem;
+	--main-color: #FF6700;
+}
+
+/*!
+ * "HackGen" is lisenced under the SIL Open Font License 1.1
+ * by https://github.com/yuru7/HackGen/
+ */
+@font-face {
+	font-family: 'HackGen';
+	src: url('../font/HackGen35ConsoleNF-Regular.ttf') format(opentype);
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: 'HackGen';
+	src: url('../font/HackGen35ConsoleNF-Bold.ttf') format(opentype);
+	font-weight: bold;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	font-family: 'HackGen';
+}
+
+header {
+	display: flex;
+	align-items: center;
+	padding: 1rem;
+	width: 100%;
+	height: var(--header-height);
+	border-radius: 0 0 1rem 1rem;
+	box-shadow: 0 0 1rem #000;
+}
+
+.logo {
+	display: flex;
+	gap: .5rem;
+	align-items: center;
+	width: fit-content;
+	color: #000;
+	text-decoration: none;
+
+	& img {
+		width: 2rem;
+	}
+
+	& span {
+		font-size: 2rem;
+		font-weight: bold;
+	}
+}
+
+main {
+	display: grid;
+	place-content: center;
+	width: 100%;
+	height: calc(100dvh - var(--header-height));
+	text-align: center;
+}
+
+section {
+	display: flex;
+	flex-direction: column;
+	gap: 4rem;
+
+	& h1 {
+		font-size: 4rem;
+		font-weight: bold;
+	}
+
+	& p {
+		font-size: 2rem;
+		line-height: 2;
+	}
+}
+
+p.small {
+	font-size: 1rem;
+}
+
+#file-button {
+	display: none;
+}
+
+#file-button-label {
+	font-size: 3rem;
+	padding: 2rem 4rem;
+	border-radius: 1rem;
+	background-color: var(--main-color);
+	color: white;
+	box-shadow: 0 0 1rem #000;
+}
+
+table {
+	max-width: 90vw;
+	border-collapse: collapse;
+}
+
+th {
+	background-color: #ffc199;
+}
+
+tr:nth-child(odd) td {
+	background-color: #ffd4b7;
+}
+
+tr:nth-child(even) td {
+	background-color: #ffece0;
+}
+
+th, td {
+	padding: .5rem;
+	border: 1px solid white;
+}
+
+td {
+	text-align: left;
+}
