@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" href="{{ url_for('static', filename='image/favicon.ico') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}" />
+	{% block style %}{% endblock %}
+	<title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+	<header>
+		<a class="logo" href="/">
+			<img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo">
+			<span>Eventpix</span>
+		</a>
+	</header>
+	<main>
+		{% block content %}{% endblock %}
+	</main>
+	{% block script %}{% endblock %}
+</body>
+</html>
