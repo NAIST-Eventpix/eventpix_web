@@ -12,4 +12,4 @@ RUN curl -sSf https://rye.astral.sh/get | RYE_INSTALL_OPTION="--yes" bash
 RUN rye sync --no-dev --no-lock
 RUN . .venv/bin/activate
 
-CMD ["rye", "run", "eventpix"]
+CMD ["rye", "run", "server"]

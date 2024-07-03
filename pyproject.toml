@@ -14,6 +14,7 @@ dependencies = [
     "pillow-heif>=0.16.0",
     "pillow>=10.3.0",
     "pytz>=2024.1",
+    "gunicorn>=22.0.0",
 ]
 readme = "README.md"
 requires-python = ">= 3.10"
@@ -33,6 +34,9 @@ dev-dependencies = [
     "types-flask-cors>=4.0.0.20240523",
     "pytest>=8.2.2",
 ]
+
+[tool.rye.scripts]
+server = "gunicorn eventpix.app:app --bind 0.0.0.0:5001"
 
 [tool.hatch.metadata]
 allow-direct-references = true

@@ -50,6 +50,8 @@ grpcio==1.64.1
     # via grpcio-status
 grpcio-status==1.62.2
     # via google-api-core
+gunicorn==22.0.0
+    # via eventpix
 h11==0.14.0
     # via httpcore
 httpcore==1.0.5
@@ -71,6 +73,8 @@ markupsafe==2.1.5
     # via werkzeug
 openai==1.35.4
     # via eventpix
+packaging==24.1
+    # via gunicorn
 pillow==10.3.0
     # via eventpix
     # via pillow-heif
