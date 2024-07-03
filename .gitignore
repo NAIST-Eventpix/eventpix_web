@@ -14,5 +14,7 @@ wheels/
 .venv
 
 *.json
+*.pem
+*.secrets
 output/
 upload/
