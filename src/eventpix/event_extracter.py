@@ -1,4 +1,3 @@
-import os
 import re
 import warnings
 from pathlib import Path
@@ -23,7 +22,7 @@ class EventExtracter:
         return self.ics2events(self.ics_content)
 
     @staticmethod
-    def ics2events(ics_src: str | os.PathLike) -> list[Event]:
+    def ics2events(ics_src: str | Path) -> list[Event]:
         if isinstance(ics_src, str):
             ics_content = ics_src
         elif isinstance(ics_src, Path):
