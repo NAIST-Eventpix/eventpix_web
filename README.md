@@ -20,4 +20,4 @@ docker compose up --build
 
 http://localhost:5001 にアクセス
 
-![サンプル](./sample.png)
+![サンプル](./sample.jpg)
