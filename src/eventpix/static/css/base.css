@@ -115,7 +115,8 @@ section {
 footer {
 	height: 2rem;
 	width: 100%;
-	text-align: center;
+	padding-left: 2rem;
+	text-align: left;
 }
 
 p {
@@ -153,3 +154,31 @@ p.small {
 		box-shadow: inset var(--box-shadow);
 	}
 }
+
+.questionnaire {
+	position: fixed;
+	right: 1rem;
+	bottom: 1rem;
+	padding: 0;
+	font-size: 1rem;
+
+	& > a {
+		display: flex;
+		gap: .5rem;
+		align-items: center;
+		padding: 1rem;
+		color: var(--color-main-text);
+		text-decoration: none;
+	}
+}
+
+.new-tab {
+	display: block;
+	width: 1em;
+	height: 1em;
+	mask-image: url('../image/open_in_new.svg');
+	--webkit-mask-image: url('../image/open_in_new.svg');
+	mask-size: cover;
+	--webkit-mask-size: cover;
+	background-color: var(--color-main-text);
+
