@@ -34,10 +34,12 @@ class Event:
         return str(src)
 
     @staticmethod
-    def _vddd2datetime(src: vDDDTypes) -> datetime.datetime | None:
+    def _vddd2datetime(src: vDDDTypes) -> datetime.datetime | datetime.date | None:
         if src is None:
             return None
         elif isinstance(src.dt, datetime.datetime):
             return src.dt
+        elif isinstance(src.dt, datetime.date):
+            return src.dt
         else:
-            raise ValueError("src.dt is not datetime.datetime")
+            raise ValueError(f"src.dt is not datetime.datetime. It is {type(src.dt)}")

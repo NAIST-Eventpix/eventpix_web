@@ -1,0 +1,25 @@
+table {
+	max-width: 90vw;
+	border-collapse: collapse;
+}
+
+th {
+	background-color: #ffc199;
+}
+
+tr:nth-child(odd) td {
+	background-color: #ffd4b7;
+}
+
+tr:nth-child(even) td {
+	background-color: #ffece0;
+}
+
+th, td {
+	padding: .5rem;
+	border: 1px solid white;
+}
+
+td {
+	text-align: left;
+}

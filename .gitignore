@@ -1,6 +1,7 @@
 .vscode/
 .DS_Store
 .env
+.DS_Store
 
 # python generated files
 __pycache__/
