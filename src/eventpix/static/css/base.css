@@ -1,0 +1,155 @@
+:root {
+	--header-height: 5rem;
+	--footer-height: 2rem;
+	--color-base: #FFF;
+	--color-base-text: #333;
+	--color-main: #FF6700;
+	--color-main-h: 24;
+	--color-main-s: 100%;
+	--color-main-hs: 24, 100%;
+	--color-main-l: 50;
+	--color-main-text: #FFF;
+	--box-shadow: 0 0 1rem var(--color-base-text);
+	--pc-upper-bound: 1920px;
+	--pc-lower-bound: calc(var(--pc-upper-bound) + 1);
+	--tab-upper-bound: 1024px;
+	--tab-lower-bound: clac(var(--sp-upper-bound) + 1);
+	--sp-upper-bound: 768px;
+
+	@media (max-width: 768px) {
+		--header-height: 7rem;
+	}
+}
+
+/*!
+ * "HackGen" is lisenced under the SIL Open Font License 1.1
+ * by https://github.com/yuru7/HackGen/
+ */
+@font-face {
+	font-family: 'HackGen';
+	src: url('../font/HackGen35ConsoleNF-Regular.ttf') format(opentype);
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: 'HackGen';
+	src: url('../font/HackGen35ConsoleNF-Bold.ttf') format(opentype);
+	font-weight: bold;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	--base-font-size-ratio: 1;
+	font-size: min(calc(var(--base-font-size-ratio) * 1vw), calc(var(--base-font-size-ratio) * var(--pc-upper-bound) * 0.01));
+	background-color: var(--color-base);
+
+	@media (max-width: 768px) {
+		--base-font-size-ratio: 1.8;
+	}
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	font-family: 'HackGen';
+}
+
+header {
+	display: flex;
+	align-items: center;
+	padding: 1rem;
+	width: 100%;
+	height: var(--header-height);
+	border-radius: 0 0 1rem 1rem;
+	box-shadow: var(--box-shadow);
+}
+
+.logo {
+	--logo-size: calc(var(--header-height) - 3rem);
+	display: flex;
+	gap: calc(var(--logo-size) * 0.2);
+	align-items: center;
+	width: fit-content;
+	color: var(--color-base-text);
+	text-decoration: none;
+
+	& img {
+		width: var(--logo-size);
+	}
+
+	& span {
+		font-size: var(--logo-size);
+		font-weight: bold;
+	}
+}
+
+main {
+	display: grid;
+	place-content: center;
+	width: 100%;
+	height: calc(100dvh - var(--header-height) - var(--footer-height));
+	text-align: center;
+}
+
+section {
+	display: flex;
+	flex-direction: column;
+	gap: 4rem;
+
+	& h1 {
+		font-size: 4rem;
+		font-weight: bold;
+	}
+
+	& p {
+		font-size: 2rem;
+	}
+}
+
+footer {
+	height: 2rem;
+	width: 100%;
+	text-align: center;
+}
+
+p {
+	line-height: 1.5;
+}
+
+p.small {
+	font-size: 1rem;
+}
+
+.hidden {
+	display: none!important;
+}
+
+@media (max-width: 1024px) {
+	.only-pc {
+		display: none;
+	}
+}
+
+.button {
+	padding: 2rem 4rem;
+	border-radius: 1rem;
+	background-color: var(--color-main);
+	box-shadow: var(--box-shadow);
+	font-size: 3rem;
+	color: var(--color-main-text);
+	transition: background-color .2s;
+
+	&:hover {
+		background-color: hsl(var(--color-main-hs), calc((var(--color-main-l) - 10) * 1%));
+	}
+
+	&:active {
+		box-shadow: inset var(--box-shadow);
+	}
+}

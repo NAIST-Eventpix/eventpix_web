@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="/static/image/Logo.png">
-	<link rel="stylesheet" href="/static/css/index.css">
-	<title>Eventpix</title>
-</head>
-<body>
-	<header>
-		<a class="logo" href="/">
-			<img src="/static/image/logo.svg" alt="Logo">
-			<span>Eventpix</span>
-		</a>
-	</header>
+{% extends './base.html' %}
+
+{% block style %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
+{% endblock %}
+
+{% block title %}Result : Eventpix{% endblock %}
+
+{% block content %}
 	<main>
 		<section>
 			<h1>抽出結果</h1>
@@ -37,6 +30,4 @@
 			</table>
 		</section>
 	</main>
-	<script src="/static/js/main.js"></script>
-</body>
-</html>
+{% endblock %}
