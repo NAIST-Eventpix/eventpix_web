@@ -1,0 +1,22 @@
+{
+    "name": "Python 3",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "charliermarsh.ruff",
+                "ms-python.mypy-type-checker"
+            ]
+        }
+    },
+    "secrets": {
+        "OPENAI_API_KEY": {
+            "description": "API key for OpenAI"
+        },
+        "GOOGLE_APPLICATION_CREDENTIALS_DATA": {
+            "description": "Content in the Google Cloud credentials file"
+        }
+    }
+}

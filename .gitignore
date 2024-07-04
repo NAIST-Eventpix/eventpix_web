@@ -14,6 +14,8 @@ wheels/
 .venv
 
 *.json
+!devcontainer.json
+
 *.pem
 *.secrets
 output/
