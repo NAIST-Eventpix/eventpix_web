@@ -1,7 +1,7 @@
 table {
 	display: block;
 	max-width: 90vw;
-	max-height: 75vw;
+	max-height: 75vh;
 	overflow-y: scroll;
 	border-collapse: collapse;
 }
