@@ -1,0 +1,29 @@
+{
+    "name": "Debian",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "postStartCommand": "rye sync",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "charliermarsh.ruff",
+                "ms-python.mypy-type-checker"
+            ]
+        },
+        "settings": {
+            "extensions.verifySignature": false,
+            "[python]": {
+                "editor.codeActionsOnSave": {
+                    "source.fixAll.ruff": "explicit",
+                    "ruff.format.args": [
+                        "--config=pyproject.toml"
+                    ]
+                },
+                "editor.defaultFormatter": "charliermarsh.ruff",
+                "editor.formatOnSave": true
+            }
+        }
+    },
+    "onCreateCommand": "echo -n $GOOGLE_APPLICATION_CREDENTIALS_DATA | sed -z 's/\\n/\\\\n/g' > $GOOGLE_APPLICATION_CREDENTIALS"
+}
