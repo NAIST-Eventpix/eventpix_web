@@ -8,9 +8,12 @@ from werkzeug.datastructures import FileStorage
 from eventpix import event_extracter
 from eventpix.image2text import Image2Text
 
+def time_convert(t):
+    return t.strftime('%Y/%m/%d %H:%M:%S')
+
 load_dotenv(override=True)
 app = Flask(__name__)
-
+app.jinja_env.globals['time_convert'] = time_convert
 
 def save(file: FileStorage) -> Path:
     content = file.read()
