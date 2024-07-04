@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from flask import Flask, render_template, request
 from werkzeug.datastructures import FileStorage
 
-from eventpix import event_extracter
+from eventpix.event_extracter import EventExtracter
 from eventpix.image2text import Image2Text
 
 def time_convert(t):
@@ -40,8 +40,8 @@ def sample_result_view() -> str:
     sample_dir = Path(__file__).parent / "sample"
     ics_path = sample_dir / "sample.ics"
     ics_text = ics_path.read_text(encoding="utf8")
-    cal = event_extracter.get_calender(ics_text)
-    return render_template("upload.html", events=cal.walk("VEVENT"))
+    events = EventExtracter.ics2events(ics_text)
+    return render_template("upload.html", events=events)
 
 
 @app.route("/upload", methods=["POST"])
@@ -50,12 +50,12 @@ def upload() -> str:
     image_path = save(file)
     image2text = Image2Text(image_path)
     image2text.detect_text()
-    cal = event_extracter.read(image2text.output_text_path)
-    return render_template("upload.html", events=cal.walk("VEVENT"))
+    events = EventExtracter(image2text.output_text_path).events
+    return render_template("upload.html", events=events)
 
 
 def main() -> None:
-    app.run(debug=True, host="0.0.0.0", port=5001)
+    app.run(host="0.0.0.0", port=8080)
 
 
 if __name__ == "__main__":

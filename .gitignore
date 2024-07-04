@@ -1,4 +1,5 @@
 .vscode/
+.DS_Store
 .env
 .DS_Store
 
@@ -14,5 +15,7 @@ wheels/
 .venv
 
 *.json
+*.pem
+*.secrets
 output/
 upload/

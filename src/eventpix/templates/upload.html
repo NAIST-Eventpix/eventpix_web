@@ -20,11 +20,11 @@
 				</tr>
 				{% for event in events %}
 					<tr>
-						<td>{{event.SUMMARY}}</td>
-						<td>{{ time_convert(event.DTSTART.dt) }}</td>
-						<td>{{ time_convert(event.DTEND.dt) }}</td>
-						<td>{{event.DESCRIPTION}}</td>
-						<td>{{event.LOCATION}}</td>
+						<td>{{ event.summary }}</td>
+						<td>{{ time_convert(event.dtstart.dt) }}</td>
+						<td>{{ time_convert(event.dtend.dt) }}</td>
+						<td>{{ event.description }}</td>
+						<td>{{ event.location }}</td>
 					</tr>
 				{% endfor %}
 			</table>
