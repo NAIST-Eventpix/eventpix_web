@@ -18,6 +18,6 @@ docker compose up --build
 
 ## 確認
 
-http://localhost:5001 にアクセス
+http://localhost:8080 にアクセス
 
-![サンプル](./sample.png)
+![サンプル](./sample.jpg)
