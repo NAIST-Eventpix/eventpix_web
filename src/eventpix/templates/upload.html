@@ -1,6 +1,10 @@
 {% extends './base.html' %}
 
-{% block title %}Result: Eventpix{% endblock %}
+{% block style %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
+{% endblock %}
+
+{% block title %}Result : Eventpix{% endblock %}
 
 {% block content %}
 	<main>
