@@ -8,7 +8,6 @@ from werkzeug.datastructures import FileStorage
 from eventpix.event_extracter import EventExtracter
 from eventpix.image2text import Image2Text
 
-
 load_dotenv(override=True)
 app = Flask(__name__)
 
