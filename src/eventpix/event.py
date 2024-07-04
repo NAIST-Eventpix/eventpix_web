@@ -12,8 +12,8 @@ class Event:
         description: vText,
         location: vText,
     ):
-        self.dtstart: str = self._vddd2str(dtstart)
-        self.dtend: str = self._vddd2str(dtend)
+        self.dtstart_str: str = self._vddd2str(dtstart)
+        self.dtend_str: str = self._vddd2str(dtend)
         self.summary: str = self._vtext2str(summary)
         self.description: str = self._vtext2str(description)
         self.location: str = self._vtext2str(location)
@@ -43,3 +43,14 @@ class Event:
             return src.dt
         else:
             raise ValueError(f"src.dt is not datetime.datetime. It is {type(src.dt)}")
+
+    @staticmethod
+    def formatDatetime(dt: datetime.datetime | datetime.date | None) -> str:
+        if dt is None:
+            return ""
+        elif isinstance(dt, datetime.datetime):
+            return dt.strftime('%Y/%m/%d %H:%M:%S')
+        elif isinstance(dt, datetime.date):
+            return dt.strftime('%Y/%m/%d')
+        else:
+            raise ValueError(f"dt is not datetime.datetime. It is {type(dt)}")
