@@ -3,6 +3,8 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from flask import Flask, render_template, request
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from werkzeug.datastructures import FileStorage
 
 from eventpix.event_extracter import EventExtracter
@@ -10,6 +12,11 @@ from eventpix.image2text import Image2Text
 
 load_dotenv(override=True)
 app = Flask(__name__)
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    storage_uri="memory://",
+)
 
 
 def save(file: FileStorage) -> Path:
@@ -42,6 +49,7 @@ def sample_result_view() -> str:
 
 
 @app.route("/upload", methods=["POST"])
+@limiter.limit("100/day;5/hour")
 def upload() -> str:
     file = request.files["image"]
     image_path = save(file)

@@ -26,15 +26,24 @@ charset-normalizer==3.3.2
     # via requests
 click==8.1.7
     # via flask
+colorama==0.4.6
+    # via click
+    # via pytest
+    # via tqdm
 datetime==5.5
     # via eventpix
+deprecated==1.2.14
+    # via limits
 distro==1.9.0
     # via openai
 flask==3.0.3
     # via eventpix
     # via flask-cors
+    # via flask-limiter
     # via types-flask-cors
 flask-cors==4.0.1
+    # via eventpix
+flask-limiter==3.7.0
     # via eventpix
 google-api-core==2.19.1
     # via google-cloud-vision
@@ -65,22 +74,33 @@ idna==3.7
     # via anyio
     # via httpx
     # via requests
+importlib-resources==6.4.0
+    # via limits
 iniconfig==2.0.0
     # via pytest
 itsdangerous==2.2.0
     # via flask
 jinja2==3.1.4
     # via flask
+limits==3.13.0
+    # via flask-limiter
+markdown-it-py==3.0.0
+    # via rich
 markupsafe==2.1.5
     # via jinja2
     # via werkzeug
+mdurl==0.1.2
+    # via markdown-it-py
 mypy==1.10.0
 mypy-extensions==1.0.0
     # via mypy
 openai==1.35.4
     # via eventpix
+ordered-set==4.1.0
+    # via flask-limiter
 packaging==24.1
     # via gunicorn
+    # via limits
     # via pytest
 pillow==10.3.0
     # via eventpix
@@ -107,6 +127,8 @@ pydantic==2.7.4
     # via openai
 pydantic-core==2.18.4
     # via pydantic
+pygments==2.18.0
+    # via rich
 pytest==8.2.2
 python-dateutil==2.9.0.post0
     # via icalendar
@@ -118,6 +140,8 @@ pytz==2024.1
     # via icalendar
 requests==2.32.3
     # via google-api-core
+rich==13.7.1
+    # via flask-limiter
 rsa==4.9
     # via google-auth
 ruff==0.4.8
@@ -133,6 +157,8 @@ tqdm==4.66.4
     # via openai
 types-flask-cors==4.0.0.20240523
 typing-extensions==4.12.1
+    # via flask-limiter
+    # via limits
     # via mypy
     # via openai
     # via pydantic
@@ -141,5 +167,7 @@ urllib3==2.2.2
     # via requests
 werkzeug==3.0.3
     # via flask
+wrapt==1.16.0
+    # via deprecated
 zope-interface==6.4.post2
     # via datetime
