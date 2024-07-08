@@ -15,7 +15,6 @@ app = Flask(__name__)
 limiter = Limiter(
     get_remote_address,
     app=app,
-    default_limits=["100 per day", "5 per hour"],
     storage_uri="memory://",
 )
 
@@ -50,6 +49,7 @@ def sample_result_view() -> str:
 
 
 @app.route("/upload", methods=["POST"])
+@limiter.limit("100/day;5/hour")
 def upload() -> str:
     file = request.files["image"]
     image_path = save(file)
