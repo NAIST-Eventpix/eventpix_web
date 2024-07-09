@@ -3,10 +3,11 @@ from datetime import datetime
 from pathlib import Path
 
 from dotenv import load_dotenv
-from flask import Flask, Response, render_template, request, send_file
+from flask import Flask, render_template, request, send_file
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from werkzeug.datastructures import FileStorage
+from werkzeug.wrappers import Response as BaseResponse
 
 from eventpix.event_extracter import EventExtracter
 from eventpix.image2text import Image2Text
@@ -68,15 +69,15 @@ def upload() -> str:
     return render_template("upload.html", events=events, ics_filename=ics_filename)
 
 @app.route("/download_generated_ics")
-def download_generated_ics() -> Response:
+def download_generated_ics() -> BaseResponse:
     filename = request.args.get("filename")
     if filename is None:
-        return "Filename is required", 400
+        return BaseResponse("Filename is required", status=400)
     ics_path = Path(__file__).parent / "upload" / filename
     return send_file(ics_path, as_attachment=True, download_name=filename)
 
 @app.route("/download_sample_ics")
-def download_sample_ics() -> Response:
+def download_sample_ics() -> BaseResponse:
     ics_path = Path(__file__).parent / "sample" / "sample.ics"
     return send_file(ics_path, as_attachment=True, download_name="sample.ics")
 
