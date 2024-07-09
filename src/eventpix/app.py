@@ -1,12 +1,12 @@
 import hashlib
 from pathlib import Path
 
-import werkzeug
 from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from werkzeug.datastructures import FileStorage
+from werkzeug.wrappers import Response as BaseResponse
 
 from eventpix.event_extracter import EventExtracter
 from eventpix.image2text import Image2Text
@@ -68,16 +68,18 @@ def sample_result_view() -> str:
     events = EventExtracter.ics2events(ics_text)
     return render_template("upload.html", events=events)
 
+
 @app.route("/sample_error_view")
-def sample_error_view() -> werkzeug.utils.redirect:
+def sample_error_view() -> BaseResponse:
     try:
-        0/1
+        0 / 1
     except Exception as e:
         raise e
     return redirect(url_for("index"))
 
+
 @app.errorhandler(Exception)
-def handle_exception(e: Exception) -> werkzeug.utils.redirect:
+def handle_exception(e: Exception) -> BaseResponse:
     flash(str(e), "error")
     return redirect(url_for("index"))
 
