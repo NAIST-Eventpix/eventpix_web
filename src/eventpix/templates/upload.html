@@ -27,24 +27,18 @@
 						<td>{{ event.description }}</td>
 						<td>{{ event.location }}</td>
 						<td>
-							<a href="https://www.google.com/calendar/render?action=TEMPLATE
-							&text={{ event.summary | urlencode }}
-							{% if event.dtstart_datetime and event.dtend_datetime %}
-							&dates={{ event.dtstart_datetime.strftime('%Y%m%dT%H%M%SZ') }}/{{ event.dtend_datetime.strftime('%Y%m%dT%H%M%SZ') }}
-							{% endif %}
-							{% if event.location %}
-							&location={{ event.location | urlencode }}
-							{% endif %}
-							{% if event.description %}
-							&details={{ event.description | urlencode }}
-							{% endif %}
-							&hl=ja" target="_blank">
-							Googleカレンダーに追加
-						</a>
+							<a href="{{ event.google_calendar_url }}" target="_blank">
+								Googleカレンダーに追加
+							</a>
 						</td>
 					</tr>
 				{% endfor %}
 			</table>
+            {% if is_sample %}
+                <a href="{{ url_for('download_sample_ics') }}" class="button small-button">すべてカレンダーに追加 (.icsファイル)</a>
+            {% else %}
+                <a href="{{ url_for('download_generated_ics', filename=ics_filename) }}" class="button small-button">すべてカレンダーに追加 (.icsファイル)</a>
+            {% endif %}
 		</section>
 	</main>
 {% endblock %}

@@ -17,6 +17,9 @@ class EventExtracter:
         self.response = self._ask_chatgpt(event_content)
         self.ics_content = self._get_ics_content_part(self.response)
 
+    def get_ics_content(self) -> str:
+        return self.ics_content
+
     @property
     def events(self) -> list[Event]:
         return self.ics2events(self.ics_content)
@@ -46,7 +49,7 @@ class EventExtracter:
                 component.get("DTEND"),
                 component.get("SUMMARY"),
                 component.get("DESCRIPTION"),
-                component.get("LOCATION"),
+                component.get("LOCATION"),   
             )
             result.append(event)
         return result

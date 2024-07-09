@@ -11,6 +11,7 @@ class Event:
         summary: vText,
         description: vText,
         location: vText,
+        google_calendar_url: str = "",
     ):
         self.dtstart_str: str = self._vddd2str(dtstart)
         self.dtend_str: str = self._vddd2str(dtend)
@@ -20,6 +21,26 @@ class Event:
 
         self.dtstart_datetime = self._vddd2datetime(dtstart)
         self.dtend_datetime = self._vddd2datetime(dtend)
+
+        self.google_calendar_url = self.generate_google_calendar_url()
+
+    def generate_google_calendar_url(self) -> str:
+        base_url = "https://www.google.com/calendar/render?action=TEMPLATE"
+        params = {
+            "text": self.summary,
+            "hl": "ja"
+        }
+        if self.dtstart_datetime and self.dtend_datetime:
+            params["dates"] = f"{self.dtstart_datetime.strftime('%Y%m%dT%H%M%SZ')}/{self.dtend_datetime.strftime('%Y%m%dT%H%M%SZ')}"
+        elif self.dtstart_datetime:
+            params["dates"] = f"{self.dtstart_datetime.strftime('%Y%m%dT%H%M%SZ')}/{self.dtstart_datetime.strftime('%Y%m%dT%H%M%SZ')}"
+        if self.location:
+            params["location"] = self.location
+        if self.description:
+            params["details"] = self.description
+
+        url_params = "&".join(f"{key}={value}" for key, value in params.items())
+        return f"{base_url}&{url_params}"
 
     @staticmethod
     def _vddd2str(src: vDDDTypes) -> str:
