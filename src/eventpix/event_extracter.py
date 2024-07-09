@@ -49,7 +49,7 @@ class EventExtracter:
                 component.get("DTEND"),
                 component.get("SUMMARY"),
                 component.get("DESCRIPTION"),
-                component.get("LOCATION"),   
+                component.get("LOCATION"),
             )
             result.append(event)
         return result
