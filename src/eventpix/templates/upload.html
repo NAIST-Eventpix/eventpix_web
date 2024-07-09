@@ -27,9 +27,20 @@
 						<td>{{ event.description }}</td>
 						<td>{{ event.location }}</td>
 						<td>
-							<a href="https://www.google.com/calendar/render?action=TEMPLATE&text={{ event.summary }}&dates={{ event.formatDatetime(event.dtstart_datetime) }}/{{ event.formatDatetime(event.dtend_datetime) }}&location={{ event.location }}&details={{ event.description }}&hl=ja" target="_blank">
-								Googleカレンダーに追加
-							</a>
+							<a href="https://www.google.com/calendar/render?action=TEMPLATE
+							&text={{ event.summary | urlencode }}
+							{% if event.dtstart_datetime and event.dtend_datetime %}
+							&dates={{ event.dtstart_datetime.strftime('%Y%m%dT%H%M%SZ') }}/{{ event.dtend_datetime.strftime('%Y%m%dT%H%M%SZ') }}
+							{% endif %}
+							{% if event.location %}
+							&location={{ event.location | urlencode }}
+							{% endif %}
+							{% if event.description %}
+							&details={{ event.description | urlencode }}
+							{% endif %}
+							&hl=ja" target="_blank">
+							Googleカレンダーに追加
+						</a>
 						</td>
 					</tr>
 				{% endfor %}
