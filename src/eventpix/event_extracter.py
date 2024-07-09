@@ -59,7 +59,7 @@ class EventExtracter:
             messages=[
                 {
                     "role": "user",
-                    "content": "以下の予定内容をicsファイルで返してください\n"
+                    "content": "以下の予定内容をicsファイルの情報のみで返してください\n出力は日本語で行ってください\n"
                     + content,
                 }
             ],
