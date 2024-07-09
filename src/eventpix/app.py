@@ -68,13 +68,15 @@ def upload() -> str:
     return render_template("upload.html", events=events, ics_filename=ics_filename)
 
 @app.route("/download_generated_ics")
-def download_generated_ics():
+def download_generated_ics() -> str:
     filename = request.args.get("filename")
+    if filename is None:
+        return "Filename is required", 400
     ics_path = Path(__file__).parent / "upload" / filename
     return send_file(ics_path, as_attachment=True, download_name=filename)
 
 @app.route("/download_sample_ics")
-def download_sample_ics():
+def download_sample_ics() -> str:
     ics_path = Path(__file__).parent / "sample" / "sample.ics"
     return send_file(ics_path, as_attachment=True, download_name="sample.ics")
 
