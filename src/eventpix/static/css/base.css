@@ -191,3 +191,6 @@ p.small {
     margin-right: auto;
 }
 
+.error {
+	color: red;
+}
