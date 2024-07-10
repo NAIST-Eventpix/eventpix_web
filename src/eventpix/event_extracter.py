@@ -17,6 +17,9 @@ class EventExtracter:
         self.response = self._ask_chatgpt(event_content)
         self.ics_content = self._get_ics_content_part(self.response)
 
+    def get_ics_content(self) -> str:
+        return self.ics_content
+
     @property
     def events(self) -> list[Event]:
         return self.ics2events(self.ics_content)
@@ -56,10 +59,11 @@ class EventExtracter:
         # https://github.com/openai/openai-python
         client = OpenAI()
         completion = client.chat.completions.create(
+            temperature=0,
             messages=[
                 {
                     "role": "user",
-                    "content": "以下の予定内容をicsファイルの情報のみで返してください\n出力は日本語で行ってください\n"
+                    "content": "以下の予定内容をicsファイルの情報のみで返してください\n"
                     + content,
                 }
             ],
@@ -73,6 +77,7 @@ class EventExtracter:
 
         return response
 
+    # [TODO] matchesのサイズが0の場合の例外処理を行う
     @staticmethod
     def _get_ics_content_part(content: str) -> str:
         pattern = re.compile(r"BEGIN:VCALENDAR.*?END:VCALENDAR", re.DOTALL)

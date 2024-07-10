@@ -1,8 +1,9 @@
 import hashlib
+from datetime import datetime
 from pathlib import Path
 
 from dotenv import load_dotenv
-from flask import Flask, flash, redirect, render_template, request, url_for
+from flask import Flask, flash, redirect, render_template, request, send_file, url_for
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from werkzeug.datastructures import FileStorage
@@ -42,22 +43,28 @@ def save(file: FileStorage) -> Path:
 def index() -> str:
     return render_template("index.html")
 
-
 @app.route("/upload", methods=["POST"])
 @limiter.limit("100/day;5/hour")
 def upload() -> str:
     try:
         file = request.files["image"]
-
         image_path = save(file)
         image2text = Image2Text(image_path)
-
         image2text.detect_text()
-        events = EventExtracter(image2text.output_text_path).events
+
+        event_extractor = EventExtracter(image2text.output_text_path)
+        events = event_extractor.events
+        ics_content = event_extractor.get_ics_content()
+
+        # ics_contentを保存
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        ics_filename = f"generated_{timestamp}.ics"
+        ics_content_path = Path(__file__).parent / "upload" / ics_filename
+        ics_content_path.write_text(ics_content, encoding="utf8")
     except Exception as e:
         raise e
 
-    return render_template("upload.html", events=events)
+    return render_template("upload.html", events=events, ics_filename=ics_filename)
 
 
 @app.route("/sample_result_view", methods=["GET"])
@@ -66,9 +73,23 @@ def sample_result_view() -> str:
     ics_path = sample_dir / "sample.ics"
     ics_text = ics_path.read_text(encoding="utf8")
     events = EventExtracter.ics2events(ics_text)
-    return render_template("upload.html", events=events)
+    return render_template("upload.html", events=events, is_sample=True)
 
 
+@app.route("/download_generated_ics")
+def download_generated_ics() -> BaseResponse:
+    filename = request.args.get("filename")
+    if filename is None:
+        return BaseResponse("Filename is required", status=400)
+    ics_path = Path(__file__).parent / "upload" / filename
+    return send_file(ics_path, as_attachment=True, download_name=filename)
+
+@app.route("/download_sample_ics")
+def download_sample_ics() -> BaseResponse:
+    ics_path = Path(__file__).parent / "sample" / "sample.ics"
+    return send_file(ics_path, as_attachment=True, download_name="sample.ics")
+
+  
 @app.route("/sample_error_view")
 def sample_error_view() -> BaseResponse:
     try:

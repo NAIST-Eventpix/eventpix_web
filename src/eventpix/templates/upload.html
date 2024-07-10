@@ -17,6 +17,7 @@
 					<th>終了</th>
 					<th>詳細</th>
 					<th>場所</th>
+					<th>追加</th>
 				</tr>
 				{% for event in events %}
 					<tr>
@@ -25,9 +26,19 @@
 						<td>{{ event.formatDatetime(event.dtend_datetime) }}</td>
 						<td>{{ event.description }}</td>
 						<td>{{ event.location }}</td>
+						<td>
+							<a href="{{ event.google_calendar_url }}" target="_blank">
+								Googleカレンダーに追加
+							</a>
+						</td>
 					</tr>
 				{% endfor %}
 			</table>
+            {% if is_sample %}
+                <a href="{{ url_for('download_sample_ics') }}" class="button small-button">.icsファイルをダウンロード(すべての予定をまとめて追加)/a>
+            {% else %}
+                <a href="{{ url_for('download_generated_ics', filename=ics_filename) }}" class="button small-button">.icsファイルをダウンロード(すべての予定をまとめて追加)</a>
+            {% endif %}
 		</section>
 	</main>
 {% endblock %}
