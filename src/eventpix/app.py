@@ -118,7 +118,7 @@ def download_sample_ics() -> BaseResponse:
 @app.route("/sample_error_view")
 def sample_error_view() -> BaseResponse:
     try:
-        0 / 1
+        0 / 0
     except Exception as e:
         raise e
     return redirect(url_for("index"))
