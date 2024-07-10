@@ -60,6 +60,14 @@ body {
 	font-family: 'HackGen';
 }
 
+a {
+	color: inherit;
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+
 header {
 	display: flex;
 	align-items: center;
@@ -123,9 +131,6 @@ p {
 	line-height: 1.5;
 }
 
-p.small {
-	font-size: 1rem;
-}
 
 .hidden {
 	display: none!important;
@@ -138,12 +143,15 @@ p.small {
 }
 
 .button {
+	width: fit-content;
+	margin-inline: auto;
 	padding: 2rem 4rem;
 	border-radius: 1rem;
 	background-color: var(--color-main);
 	box-shadow: var(--box-shadow);
 	font-size: 3rem;
 	color: var(--color-main-text);
+	text-decoration: none;
 	transition: background-color .2s;
 
 	&:hover {
@@ -155,11 +163,17 @@ p.small {
 	}
 }
 
+.small {
+	font-size: 1rem;
+}
+
 .questionnaire {
+	display: flex;
+	align-items: center;
 	position: fixed;
 	right: 1rem;
 	bottom: 1rem;
-	padding: 0;
+	padding: 1rem;
 	font-size: 1rem;
 
 	& > a {
@@ -168,7 +182,6 @@ p.small {
 		align-items: center;
 		padding: 1rem;
 		color: var(--color-main-text);
-		text-decoration: none;
 	}
 }
 
@@ -181,14 +194,6 @@ p.small {
 	mask-size: cover;
 	--webkit-mask-size: cover;
 	background-color: var(--color-main-text);
-}
-
-.small-button {
-	display: block;
-	font-size: 1rem;
-	text-align: center;
-	margin-left: auto;
-    margin-right: auto;
 }
 
 .error {
