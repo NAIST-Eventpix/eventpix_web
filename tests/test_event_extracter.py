@@ -107,24 +107,16 @@ END:VCALENDAR"""
 
         assert events[0].summary == "プロトタイピングA"
 
-        assert events[0].dtstart_datetime == asia.localize(
-            datetime.datetime(2023, 5, 30, 18, 0)
-        )
-        assert events[0].dtend_datetime == asia.localize(
-            datetime.datetime(2023, 5, 30, 21, 0)
-        )
+        assert events[0].dtstart == asia.localize(datetime.datetime(2023, 5, 30, 18, 0))
+        assert events[0].dtend == asia.localize(datetime.datetime(2023, 5, 30, 21, 0))
         assert (
             events[0].description
             == "組み込みシステム1 - Raspberry Pi とLED/センサーを組み合わせたシステムとWebサービスの連携"
         )
         assert events[0].location == "奈良先端大"
         assert events[1].summary == "イノベーション創出特論1"
-        assert events[1].dtstart_datetime == asia.localize(
-            datetime.datetime(2023, 6, 1, 10, 30)
-        )
-        assert events[1].dtend_datetime == asia.localize(
-            datetime.datetime(2023, 6, 1, 17, 50)
-        )
+        assert events[1].dtstart == asia.localize(datetime.datetime(2023, 6, 1, 10, 30))
+        assert events[1].dtend == asia.localize(datetime.datetime(2023, 6, 1, 17, 50))
         assert (
             events[1].description
             == "GEIOT基礎１ - パネル：先端科学技術事業化の潮流と重要性、概要先端科学技術ベンチャーの現在、ビジネスモデルキャンバス、チームわけ、アイスブレーク"
@@ -155,21 +147,17 @@ END:VCALENDAR"""
 
         assert events[0].summary == ""
 
-        assert events[0].dtstart_datetime is None
+        assert events[0].dtstart is None
 
-        assert events[0].dtend_datetime == asia.localize(
-            datetime.datetime(2023, 5, 30, 21, 0)
-        )
+        assert events[0].dtend == asia.localize(datetime.datetime(2023, 5, 30, 21, 0))
         assert (
             events[0].description
             == "組み込みシステム1 - Raspberry Pi とLED/センサーを組み合わせたシステムとWebサービスの連携"
         )
         assert events[0].location == "奈良先端大"
         assert events[1].summary == "イノベーション創出特論1"
-        assert events[1].dtstart_datetime == asia.localize(
-            datetime.datetime(2023, 6, 1, 10, 30)
-        )
-        assert events[1].dtend_datetime is None
+        assert events[1].dtstart == asia.localize(datetime.datetime(2023, 6, 1, 10, 30))
+        assert events[1].dtend is None
 
         assert events[1].description == ""
         assert events[1].location == "MOBIO"
@@ -179,16 +167,28 @@ END:VCALENDAR"""
         events = EventExtracter.ics2events(ics_content)
 
         assert events == []
-    
+
     def test_add_asia_timezone(self) -> None:
         src = "DTEND:20230530T210000"
-        assert EventExtracter.add_asia_timezone(src) == "DTEND;TZID=Asia/Tokyo:20230530T210000"
+        assert (
+            EventExtracter.add_asia_timezone(src)
+            == "DTEND;TZID=Asia/Tokyo:20230530T210000"
+        )
 
         src = "DTEND:20230530T210000"
-        assert EventExtracter.add_asia_timezone(src) == "DTEND;TZID=Asia/Tokyo:20230530T210000"
+        assert (
+            EventExtracter.add_asia_timezone(src)
+            == "DTEND;TZID=Asia/Tokyo:20230530T210000"
+        )
 
         src = "DTEND;TZID=Asia/Tokyo:20230530T210000"
-        assert EventExtracter.add_asia_timezone(src) == "DTEND;TZID=Asia/Tokyo:20230530T210000"
+        assert (
+            EventExtracter.add_asia_timezone(src)
+            == "DTEND;TZID=Asia/Tokyo:20230530T210000"
+        )
 
         src = "DTSTART:20230601T103000"
-        assert EventExtracter.add_asia_timezone(src) == "DTSTART;TZID=Asia/Tokyo:20230601T103000"
+        assert (
+            EventExtracter.add_asia_timezone(src)
+            == "DTSTART;TZID=Asia/Tokyo:20230601T103000"
+        )
