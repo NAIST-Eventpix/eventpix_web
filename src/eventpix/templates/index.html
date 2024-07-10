@@ -21,7 +21,7 @@
 		{% endwith %}
 		<form id="js-form" action="upload" method="POST" enctype="multipart/form-data">
 			<label id="file-button-label" class="button" for="file-button">画像を選択</label>
-			<input id="file-button" type="file" name="image" onchange="submitForm()">
+			<input id="file-button" type="file" accept="image/*" name="image" onchange="submitForm()">
 		</form>
 		<p class="small only-pc">または，ここに画像をドラッグ＆ドロップしてください</p>
 	</section>
