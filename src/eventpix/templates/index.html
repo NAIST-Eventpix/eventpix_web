@@ -14,24 +14,28 @@
 	<section>
 		<h1>画像から予定抽出</h1>
 		<p>スケジュールの写真からカレンダー情報を抽出します<br/>抽出した情報はカレンダーアプリに反映できます</p>
+		{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+				<p class="error">画像を正しく処理できませんでした</p>
+			{% endif %}
+		{% endwith %}
 		<form id="js-form" action="upload" method="POST" enctype="multipart/form-data">
 			<label id="file-button-label" class="button" for="file-button">画像を選択</label>
-			<input id="file-button" type="file" name="image" onchange="submitForm()">
+			<input id="file-button" type="file" accept="image/*" name="image" onchange="submitForm()">
 		</form>
 		<p class="small only-pc">または，ここに画像をドラッグ＆ドロップしてください</p>
 	</section>
-
-	{% with messages = get_flashed_messages(with_categories=true) %}
-		{% if messages %}
-			<ul class="flashes">
-			{% for category, message in messages %}
-				<li class="{{ category }}">{{ message }}</li>
-			{% endfor %}
-			</ul>
-		{% endif %}
-	{% endwith %}
 {% endblock %}
 
 {% block script %}
 	<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+	{% with messages = get_flashed_messages(with_categories=true) %}
+		{% if messages %}
+			<script>
+				{% for category, message in messages %}
+					console.error('{{ category }}', ':', '{{ message }}');
+				{% endfor %}
+			</script>
+		{% endif %}
+	{% endwith %}
 {% endblock %}
