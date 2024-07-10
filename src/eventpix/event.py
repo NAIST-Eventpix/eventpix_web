@@ -3,7 +3,7 @@ from typing import TypeAlias
 
 from icalendar.prop import vDDDTypes, vText  # type: ignore[import-untyped]
 
-Date: TypeAlias = datetime.datetime | datetime.date | None
+Datetime: TypeAlias = datetime.datetime | datetime.date | None
 
 
 class Event:
@@ -23,11 +23,11 @@ class Event:
         self.google_calendar_url = self.generate_google_calendar_url()
 
     @property
-    def dtstart(self) -> Date:
+    def dtstart(self) -> Datetime:
         return self._dtstart
 
     @property
-    def dtend(self) -> Date:
+    def dtend(self) -> Datetime:
         return self._dtend
 
     @property
@@ -76,7 +76,7 @@ class Event:
         return str(src)
 
     @staticmethod
-    def _vddd2datetime(src: vDDDTypes) -> datetime.datetime | datetime.date | None:
+    def _vddd2datetime(src: vDDDTypes) -> Datetime:
         if src is None:
             return None
         elif isinstance(src.dt, datetime.datetime):
@@ -87,7 +87,7 @@ class Event:
             raise ValueError(f"src.dt is not datetime.datetime. It is {type(src.dt)}")
 
     @staticmethod
-    def _format_datetime(dt: datetime.datetime | datetime.date | None) -> str:
+    def _format_datetime(dt: Datetime) -> str:
         if isinstance(dt, datetime.datetime):
             return dt.strftime("%Y/%m/%d %H:%M:%S")
         elif isinstance(dt, datetime.date):
