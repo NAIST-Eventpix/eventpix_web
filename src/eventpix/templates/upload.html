@@ -35,9 +35,9 @@
 				{% endfor %}
 			</table>
             {% if is_sample %}
-                <a href="{{ url_for('download_sample_ics') }}" class="button small-button">すべてカレンダーに追加 (.icsファイル)</a>
+                <a href="{{ url_for('download_sample_ics') }}" class="button small-button">.icsファイルをダウンロード(すべての予定をまとめて追加)/a>
             {% else %}
-                <a href="{{ url_for('download_generated_ics', filename=ics_filename) }}" class="button small-button">すべてカレンダーに追加 (.icsファイル)</a>
+                <a href="{{ url_for('download_generated_ics', filename=ics_filename) }}" class="button small-button">.icsファイルをダウンロード(すべての予定をまとめて追加)</a>
             {% endif %}
 		</section>
 	</main>

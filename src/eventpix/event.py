@@ -31,9 +31,9 @@ class Event:
             "hl": "ja"
         }
         if self.dtstart_datetime and self.dtend_datetime:
-            params["dates"] = f"{self.dtstart_datetime.strftime('%Y%m%dT%H%M%SZ')}/{self.dtend_datetime.strftime('%Y%m%dT%H%M%SZ')}"
+            params["dates"] = f"{self.dtstart_datetime.strftime('%Y%m%dT%H%M%S')}/{self.dtend_datetime.strftime('%Y%m%dT%H%M%S')}"
         elif self.dtstart_datetime:
-            params["dates"] = f"{self.dtstart_datetime.strftime('%Y%m%dT%H%M%SZ')}/{self.dtstart_datetime.strftime('%Y%m%dT%H%M%SZ')}"
+            params["dates"] = f"{self.dtstart_datetime.strftime('%Y%m%dT%H%M%S')}/{self.dtstart_datetime.strftime('%Y%m%dT%H%M%S')}"
         if self.location:
             params["location"] = self.location
         if self.description:
