@@ -56,7 +56,8 @@ def index() -> str:
 
 
 @app.route("/upload", methods=["POST"])
-@limiter.limit("100/day;5/hour")
+# @limiter.limit("100/day;5/hour")
+@limiter.limit("10000/day;500/hour")
 def upload() -> BaseResponse:
     file = request.files["image"]
     image_path = save(file)
