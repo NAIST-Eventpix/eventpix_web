@@ -14,3 +14,7 @@ function submitForm() {
 	document.getElementById('js-loading-modal').classList.remove('hidden');
 	document.getElementById('js-form').submit();
 };
+
+window.addEventListener('load', () => {
+	document.getElementById('js-loading-modal').classList.add('hidden');
+});
