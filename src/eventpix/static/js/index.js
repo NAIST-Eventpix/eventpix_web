@@ -8,6 +8,9 @@ setInterval(() => {
 
 // フォームの送信処理
 function submitForm() {
+	if (!document.getElementById('file-button').value) {
+		return false;
+	}
 	document.getElementById('js-loading-modal').classList.remove('hidden');
 	document.getElementById('js-form').submit();
 };
