@@ -1,12 +1,22 @@
+from pathlib import Path
+
 from pypdf import PdfReader
 
 
 class Pdf2Text:
-    def __init__(self, pdf_path: str):
+    def __init__(self, pdf_path: Path):
         self.pdf_path = pdf_path
-        self.text = self.get_text()
+        self._hash = pdf_path.stem
 
-    def get_text(self) -> str:
+        output_dir = Path(__file__).parent / "output"
+        output_dir.mkdir(exist_ok=True)
+        self._output_text_path = output_dir / f"{self._hash}.txt"
+
+    @property
+    def output_text_path(self) -> Path:
+        return self._output_text_path
+
+    def detect_text(self) -> None:
         reader = PdfReader(self.pdf_path)
         number_of_pages = len(reader.pages)
 
@@ -17,7 +27,10 @@ class Pdf2Text:
             text = page.extract_text()
             extract_text += text
 
-        return extract_text
+        self._save(extract_text)
+
+    def _save(self, res_text: str) -> None:
+        self._output_text_path.write_text(res_text, encoding="utf8")
 
 
 if __name__ == "__main__":
