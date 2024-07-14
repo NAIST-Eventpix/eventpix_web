@@ -44,7 +44,7 @@ def save(file: FileStorage) -> Path:
 
 def get_image_path(image_id: str) -> Path:
     upload_dir = Path(__file__).parent / "upload"
-    return list(upload_dir.glob(f"{image_id}.*"))[0]
+    return list(upload_dir.glob(f"{image_id}*[!ics]"))[0]
 
 
 def get_ics_path(image_id: str) -> Path:
