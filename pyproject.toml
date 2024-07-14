@@ -16,7 +16,6 @@ dependencies = [
     "pytz>=2024.1",
     "gunicorn>=22.0.0",
     "flask-limiter>=3.7.0",
-    "spire-pdf>=10.7.1",
     "pypdf>=4.2.0",
 ]
 readme = "README.md"
