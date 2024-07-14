@@ -12,26 +12,35 @@ function setProgress(num) {
 }
 
 // フォームの送信処理
-function submitForm() {
-	const file = document.getElementById('file-button').value;
+async function submitForm() {
+	const file = document.getElementById('file-button').files[0];
+	console.log(file);
+
 	if (!file) {
 		return false;
 	}
 
 	document.getElementById('js-loading-modal').classList.remove('hidden');
 
+	let id_url;
 	try {
 		const formData = new FormData();
-		formData.append('file', file.files[0]);
+		formData.append('image', file);
 
-		const response_upload = await fetch('/upload', {
+		let id;
+		await fetch('/upload', {
 			method: 'POST',
 			body: formData
+		})
+		.then(response => {
+			return response.text();
+		})
+		.then(text => {
+			id = text;
 		});
+		id_url = encodeURIComponent(id);
 
 		setProgress(33);
-		const id = response_upload.text();
-		const id_url = encodeURIComponent(id);
 
 		const resopnse_visionai = await fetch(`/visionai?id=${id_url}`);
 		setProgress(66);

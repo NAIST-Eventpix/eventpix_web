@@ -1,6 +1,5 @@
 import hashlib
 import traceback
-from datetime import datetime
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -91,8 +90,7 @@ def openai() -> str:
     ics_content = event_extractor.get_ics_content()
 
     # ics_contentを保存
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    ics_filename = f"generated_{timestamp}.ics"
+    ics_filename = f"{image_id}.ics"
     ics_content_path = Path(__file__).parent / "upload" / ics_filename
     ics_content_path.write_text(ics_content, encoding="utf8")
 
