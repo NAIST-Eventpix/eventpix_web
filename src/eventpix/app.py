@@ -72,6 +72,7 @@ def upload() -> BaseResponse:
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     ics_filename = f"generated_{timestamp}.ics"
     ics_content_path = Path(__file__).parent / "upload" /  "generated" / ics_filename
+    ics_content_path.mkdir(exist_ok=True)
     ics_content_path.write_text(ics_content, encoding="utf8")
 
     for event in events:
@@ -88,7 +89,6 @@ def result_view() -> str:
     if ics_filename is None:
         raise ValueError("ics_filename is None")
     ics_path = Path(__file__).parent / "upload" / "generated" / ics_filename
-    ics_path.mkdir(exist_ok=True)
     events = EventExtracter.ics2events(ics_path)
     return render_template("result.html", events=events, ics_filename=ics_filename)
 
