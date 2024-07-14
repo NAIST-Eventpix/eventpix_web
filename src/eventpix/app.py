@@ -106,7 +106,7 @@ def download_generated_ics() -> BaseResponse:
     filename = request.args.get("filename")
     if filename is None:
         return BaseResponse("Filename is required", status=400)
-    ics_path = Path(__file__).parent / "upload" / filename
+    ics_path = Path(__file__).parent / "upload" / "generated" / filename
     return send_file(ics_path, as_attachment=True, download_name=filename)
 
 
