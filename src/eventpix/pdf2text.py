@@ -1,8 +1,4 @@
-from spire.pdf import (  # type: ignore[import-untyped]
-    PdfDocument,
-    PdfTextExtractOptions,
-    PdfTextExtractor,
-)
+from pypdf import PdfReader
 
 
 class Pdf2Text:
@@ -11,23 +7,17 @@ class Pdf2Text:
         self.text = self.get_text()
 
     def get_text(self) -> str:
-        pdf = PdfDocument()
-        pdf.LoadFromFile(self.pdf_path)
+        reader = PdfReader(self.pdf_path)
+        number_of_pages = len(reader.pages)
 
-        extracted_text = ""
+        extract_text = ""
 
-        extract_options = PdfTextExtractOptions()
-        extract_options.IsSimpleExtraction = True
+        for page_number in range(number_of_pages):
+            page = reader.pages[page_number]
+            text = page.extract_text()
+            extract_text += text
 
-        for i in range(pdf.Pages.Count):
-            page = pdf.Pages.get_Item(i)
-            text_extractor = PdfTextExtractor(page)
-            text = text_extractor.ExtractText(extract_options)
-            extracted_text += text
-
-        pdf.Close()
-
-        return extracted_text
+        return extract_text
 
 
 if __name__ == "__main__":
