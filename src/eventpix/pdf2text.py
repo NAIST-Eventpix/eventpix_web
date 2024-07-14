@@ -34,6 +34,7 @@ class Pdf2Text:
 
 
 if __name__ == "__main__":
-    pdf_path = "sample.pdf"
+    pdf_path = Path("sample.pdf")
     pdf2text = Pdf2Text(pdf_path)
-    print(pdf2text.text)
+    pdf2text.detect_text()
+    print(pdf2text.output_text_path)
