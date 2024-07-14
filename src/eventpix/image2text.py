@@ -18,7 +18,7 @@ class Image2Text:
         self._imagepath = imagepath
         self._hash = imagepath.stem
 
-        output_dir = Path(__file__).parent / "output"
+        output_dir = Path(__file__).parent / "upload/tmp"
         output_dir.mkdir(exist_ok=True)
         self._output_text_path = output_dir / f"{self._hash}.txt"
         self._output_json_path = output_dir / f"{self._hash}.json"
