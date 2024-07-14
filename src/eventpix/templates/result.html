@@ -22,8 +22,8 @@
 				{% for event in events %}
 					<tr>
 						<td>{{ event.summary }}</td>
-						<td>{{ event.formatDatetime(event.dtstart_datetime) }}</td>
-						<td>{{ event.formatDatetime(event.dtend_datetime) }}</td>
+						<td>{{ event.formatted_dtstart }}</td>
+						<td>{{ event.formatted_dtend }}</td>
 						<td>{{ event.description }}</td>
 						<td>{{ event.location }}</td>
 						<td>
