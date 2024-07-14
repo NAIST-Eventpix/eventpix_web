@@ -6,13 +6,45 @@ setInterval(() => {
 	dots.innerText = '.'.repeat(len);
 }, 1000);
 
+// プログレスの設定
+function setProgress(num) {
+	console.log(num);
+}
+
 // フォームの送信処理
 function submitForm() {
-	if (!document.getElementById('file-button').value) {
+	const file = document.getElementById('file-button').value;
+	if (!file) {
 		return false;
 	}
+
 	document.getElementById('js-loading-modal').classList.remove('hidden');
-	document.getElementById('js-form').submit();
+
+	try {
+		const formData = new FormData();
+		formData.append('file', file.files[0]);
+
+		const response_upload = await fetch('/upload', {
+			method: 'POST',
+			body: formData
+		});
+
+		setProgress(33);
+		const id = response_upload.text();
+		const id_url = encodeURIComponent(id);
+
+		const resopnse_visionai = await fetch(`/visionai?id=${id_url}`);
+		setProgress(66);
+
+		const response_openai = await fetch(`/openai?id=${id_url}`);
+		setProgress(100);
+	}
+	catch(e) {
+		console.error('Error :', e);
+		return false;
+	}
+
+	window.location.href = `/result?id=${id_url}`;
 };
 
 window.addEventListener('load', () => {
