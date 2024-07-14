@@ -1,20 +1,10 @@
 import hashlib
-import os
 import traceback
 from datetime import datetime
 from pathlib import Path
 
 from dotenv import load_dotenv
-from flask import (
-    Flask,
-    flash,
-    redirect,
-    render_template,
-    request,
-    send_file,
-    session,
-    url_for,
-)
+from flask import Flask, flash, redirect, render_template, request, send_file, url_for
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from werkzeug.datastructures import FileStorage
@@ -26,7 +16,6 @@ from eventpix.image2text import Image2Text
 load_dotenv(override=True)
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
 
 limiter = Limiter(
     get_remote_address,
@@ -35,9 +24,13 @@ limiter = Limiter(
 )
 
 
+def calculate_hash(content: bytes) -> str:
+    return hashlib.md5(content).hexdigest()
+
+
 def save(file: FileStorage) -> Path:
     content = file.read()
-    hash = hashlib.md5(content).hexdigest()
+    hash = calculate_hash(content)
 
     if file.filename is None:
         raise ValueError("file.filename is None")
@@ -50,21 +43,50 @@ def save(file: FileStorage) -> Path:
     return path
 
 
+def get_image_path(image_id: str) -> Path:
+    upload_dir = Path(__file__).parent / "upload"
+    return list(upload_dir.glob(f"{image_id}.*"))[0]
+
+
+def get_ics_path(image_id: str) -> Path:
+    ics_dir = Path(__file__).parent / "upload"
+    return ics_dir / f"{image_id}.ics"
+
+
 @app.route("/")
 def index() -> str:
     return render_template("index.html")
 
 
 @app.route("/upload", methods=["POST"])
-# @limiter.limit("100/day;5/hour")
 @limiter.limit("10000/day;500/hour")
-def upload() -> BaseResponse:
+def upload() -> str:
     file = request.files["image"]
     image_path = save(file)
+    return image_path.stem
+
+
+@app.route("/visionai", methods=["GET"])
+def visionai() -> str:
+    req = request.args
+    image_id = req.get("id")
+    if image_id is None:
+        raise ValueError("image_id is required")
+    image_path = get_image_path(image_id)
     image2text = Image2Text(image_path)
     image2text.detect_text()
+    return image_id
 
-    event_extractor = EventExtracter(image2text.output_text_path)
+
+@app.route("/openai", methods=["GET"])
+def openai() -> str:
+    req = request.args
+    image_id = req.get("id")
+    if image_id is None:
+        raise ValueError("image_id is required")
+    image_path = get_image_path(image_id)
+    output_text_path = Image2Text(image_path).output_text_path
+    event_extractor = EventExtracter(output_text_path)
     events = event_extractor.events
     ics_content = event_extractor.get_ics_content()
 
@@ -77,19 +99,18 @@ def upload() -> BaseResponse:
     for event in events:
         event.google_calendar_url = event.generate_google_calendar_url()
 
-    session["ics_filename"] = ics_filename
-
-    return redirect(url_for("result_view"))
+    return image_id
 
 
-@app.route("/result_view", methods=["GET"])
-def result_view() -> str:
-    ics_filename = session.get("ics_filename")
-    if ics_filename is None:
-        raise ValueError("ics_filename is None")
-    ics_path = Path(__file__).parent / "upload" / ics_filename
+@app.route("/result", methods=["GET"])
+def result() -> str:
+    req = request.args
+    image_id = req.get("id")
+    if image_id is None:
+        raise ValueError("image_id is required")
+    ics_path = get_ics_path(image_id)
     events = EventExtracter.ics2events(ics_path)
-    return render_template("result.html", events=events, ics_filename=ics_filename)
+    return render_template("result.html", events=events, ics_filename=ics_path.name)
 
 
 @app.route("/sample_result_view", methods=["GET"])
