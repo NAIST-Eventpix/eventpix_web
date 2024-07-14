@@ -43,7 +43,7 @@ def save(file: FileStorage) -> Path:
         raise ValueError("file.filename is None")
 
     suffix = Path(file.filename).suffix
-    upload_dir = Path(__file__).parent / "upload"
+    upload_dir = Path(__file__).parent / "upload" / "files"
     upload_dir.mkdir(exist_ok=True)
     path = upload_dir / f"{hash}{suffix}"
     path.write_bytes(content)
@@ -71,8 +71,9 @@ def upload() -> BaseResponse:
     # ics_contentを保存
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     ics_filename = f"generated_{timestamp}.ics"
-    ics_content_path = Path(__file__).parent / "upload" /  "generated" / ics_filename
-    ics_content_path.mkdir(exist_ok=True)
+    ics_save_dir = Path(__file__).parent / "upload" /  "generated"
+    ics_save_dir.mkdir(exist_ok=True)
+    ics_content_path = ics_save_dir / ics_filename
     ics_content_path.write_text(ics_content, encoding="utf8")
 
     for event in events:
