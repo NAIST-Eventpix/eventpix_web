@@ -1,5 +1,6 @@
 import re
 import warnings
+from datetime import datetime
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -63,7 +64,7 @@ class EventExtracter:
             messages=[
                 {
                     "role": "user",
-                    "content": "以下の予定内容をicsファイルの情報のみで返してください\n"
+                    "content": f"以下の予定内容をicsファイルの情報のみで返してください\n予定の日時に年の情報がない場合は{datetime.now().strftime("%Y")}年にしてください\n\n"
                     + content,
                 }
             ],
