@@ -67,7 +67,7 @@ class EventExtracter:
                     + content,
                 }
             ],
-            model="gpt-4o",
+            model="gpt-4o-mini",
         )
 
         response = completion.choices[0].message.content
