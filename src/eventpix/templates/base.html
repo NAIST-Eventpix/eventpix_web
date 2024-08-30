@@ -3,9 +3,17 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="icon" href="{{ url_for('static', filename='image/favicon.ico') }}" />
+	<link rel="icon" href="{{ url_for('static', filename='image/favicon.ico') }}" type="image/x-icon" />
+	<link rel="shortcut icon" href="{{ url_for('static', filename='image/favicon.ico') }}" type="image/x-icon" />
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}" />
+	<meta name="description" content="予定の自動抽出アプリ．画像から予定情報を抽出しカレンダーアプリに反映できます．画像認識＆AI" />
 	{% block style %}{% endblock %}
+<style>
+	header {
+		display: flex;
+		justify-content: space-between;
+	}
+</style>
 	<title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -14,6 +22,7 @@
 			<img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo">
 			<span>Eventpix</span>
 		</a>
+		<a href="/contact">お問い合わせ</a>
 	</header>
 	<main>
 		{% block content %}{% endblock %}
@@ -21,5 +30,14 @@
 	<a class="button questionnaire" href="https://docs.google.com/forms/d/e/1FAIpQLSf9CuAyhApMMmuJtSeMx-TVlEao0405BnO3eF5SspxCTR6lQQ/viewform?usp=sf_link" target="blank">フィードバックにご協力お願いします<span class="new-tab"></span></a>
 	<footer>&copy; 2024 Eventpix All rights reserved</footer>
 	{% block script %}{% endblock %}
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "Organization",
+			"name": "Eventpix",
+			"url": "https://eventpix.jp",
+			"logo": "https://eventpix.jp/static/image/favicon.ico"
+		}
+	</script>
 </body>
 </html>
