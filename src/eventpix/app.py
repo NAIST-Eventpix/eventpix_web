@@ -55,6 +55,11 @@ def index() -> str:
     return render_template("index.html")
 
 
+@app.route("/contact")
+def contact() -> str:
+    return render_template("contact.html")
+
+
 @app.route("/upload", methods=["POST"])
 # @limiter.limit("100/day;5/hour")
 @limiter.limit("10000/day;500/hour")

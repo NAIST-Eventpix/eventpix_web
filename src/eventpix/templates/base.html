@@ -8,6 +8,12 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}" />
 	<meta name="description" content="予定の自動抽出アプリ．画像から予定情報を抽出しカレンダーアプリに反映できます．画像認識＆AI" />
 	{% block style %}{% endblock %}
+<style>
+	header {
+		display: flex;
+		justify-content: space-between;
+	}
+</style>
 	<title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -16,6 +22,7 @@
 			<img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo">
 			<span>Eventpix</span>
 		</a>
+		<a href="/contact">お問い合わせ</a>
 	</header>
 	<main>
 		{% block content %}{% endblock %}
