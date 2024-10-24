@@ -8,6 +8,10 @@ No Calendar No Life
 
 - Docker
 
+## 準備
+
+`.env.example`を参考に`.env`を作成．
+
 ## 実行
 
 `compose.yml`があるディレクトリで次のコマンドを実行．
