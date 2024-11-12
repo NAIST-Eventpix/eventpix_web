@@ -119,6 +119,8 @@ pydantic-core==2.18.4
     # via pydantic
 pygments==2.18.0
     # via rich
+pypdf==4.2.0
+    # via eventpix
 python-dateutil==2.9.0.post0
     # via icalendar
 python-dotenv==1.0.1

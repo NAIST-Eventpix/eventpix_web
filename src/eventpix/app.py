@@ -22,6 +22,7 @@ from werkzeug.wrappers import Response as BaseResponse
 
 from eventpix.event_extracter import EventExtracter
 from eventpix.image2text import Image2Text
+from eventpix.pdf2text import Pdf2Text
 
 load_dotenv(override=True)
 
@@ -43,8 +44,8 @@ def save(file: FileStorage) -> Path:
         raise ValueError("file.filename is None")
 
     suffix = Path(file.filename).suffix
-    upload_dir = Path(__file__).parent / "upload"
-    upload_dir.mkdir(exist_ok=True)
+    upload_dir = Path(__file__).parent / "upload" / "files"
+    upload_dir.mkdir(exist_ok=True, parents=True)
     path = upload_dir / f"{hash}{suffix}"
     path.write_bytes(content)
     return path
@@ -64,12 +65,19 @@ def contact() -> str:
 # @limiter.limit("100/day;5/hour")
 @limiter.limit("10000/day;500/hour")
 def upload() -> BaseResponse:
-    file = request.files["image"]
-    image_path = save(file)
-    image2text = Image2Text(image_path)
-    image2text.detect_text()
+    file = request.files["contents"]
+    file_path = save(file)
 
-    event_extractor = EventExtracter(image2text.output_text_path)
+    if file_path.suffix == ".pdf":
+        pdf2text = Pdf2Text(file_path)
+        pdf2text.detect_text()
+        output_text_path = pdf2text.output_text_path
+    else:
+        image2text = Image2Text(file_path)
+        image2text.detect_text()
+        output_text_path = image2text.output_text_path
+
+    event_extractor = EventExtracter(output_text_path)
     events = event_extractor.events
     ics_content = event_extractor.get_ics_content()
 
