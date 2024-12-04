@@ -43,7 +43,7 @@ def save(file: FileStorage) -> Path:
         raise ValueError("file.filename is None")
 
     suffix = Path(file.filename).suffix
-    upload_dir = Path(__file__).parent / "upload"
+    upload_dir = Path(__file__).parent / "upload" / "files"
     upload_dir.mkdir(exist_ok=True)
     path = upload_dir / f"{hash}{suffix}"
     path.write_bytes(content)
@@ -76,7 +76,9 @@ def upload() -> BaseResponse:
     # ics_contentを保存
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     ics_filename = f"generated_{timestamp}.ics"
-    ics_content_path = Path(__file__).parent / "upload" / ics_filename
+    ics_save_dir = Path(__file__).parent / "upload" /  "generated"
+    ics_save_dir.mkdir(exist_ok=True)
+    ics_content_path = ics_save_dir / ics_filename
     ics_content_path.write_text(ics_content, encoding="utf8")
 
     for event in events:
@@ -92,7 +94,7 @@ def result_view() -> str:
     ics_filename = session.get("ics_filename")
     if ics_filename is None:
         raise ValueError("ics_filename is None")
-    ics_path = Path(__file__).parent / "upload" / ics_filename
+    ics_path = Path(__file__).parent / "upload" / "generated" / ics_filename
     events = EventExtracter.ics2events(ics_path)
     return render_template("result.html", events=events, ics_filename=ics_filename)
 
@@ -111,7 +113,7 @@ def download_generated_ics() -> BaseResponse:
     filename = request.args.get("filename")
     if filename is None:
         return BaseResponse("Filename is required", status=400)
-    ics_path = Path(__file__).parent / "upload" / filename
+    ics_path = Path(__file__).parent / "upload" / "generated" / filename
     return send_file(ics_path, as_attachment=True, download_name=filename)
 
 
